@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blower Door & Envelope Retrofit Quiz</title>
+  <style>
+    body {font-family: Arial, sans-serif;max-width: 900px;margin:auto;padding:20px;background:#f4f9ff;color:#333;}
+    h1{ text-align:center;color:#004080; margin-bottom:30px;}
+    .question{margin-bottom:20px;padding:15px;background:#fff;border:1px solid #ccc;border-radius:6px;}
+    .question label{display:block;margin:6px 0;}
+    .feedback{display:none;font-style:italic;margin-top:6px;}
+    button{margin-top:8px;padding:6px 14px;cursor:pointer;}
+  </style>
+</head>
+<body>
+  <h1>Blower Door & Envelope Retrofit – 20-Question Quiz</h1>
+
+  <!-- Question 1 -->
+  <div class="question" id="q1">
+    <p><strong>1. What is the industry-standard pressure for blower-door tests?</strong></p>
+    <label><input type="radio" name="q1" value="a"> 10 Pa</label>
+    <label><input type="radio" name="q1" value="b"> 25 Pa</label>
+    <label><input type="radio" name="q1" value="c"> 50 Pa</label>
+    <label><input type="radio" name="q1" value="d"> 100 Pa</label>
+    <div class="feedback">Correct answer: 50 Pa – the reference pressure for ACH calculations.</div>
+    <button onclick="checkAnswer('q1','c')">Submit</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question" id="q2">
+    <p><strong>2. Which unit is used to measure air leakage during a blower-door test?</strong></p>
+    <label><input type="radio" name="q2" value="a"> BTU</label>
+    <label><input type="radio" name="q2" value="b"> CFM</label>
+    <label><input type="radio" name="q2" value="c"> Joules</label>
+    <label><input type="radio" name="q2" value="d"> Watts</label>
+    <div class="feedback">Correct answer: CFM – cubic feet per minute of airflow.</div>
+    <button onclick="checkAnswer('q2','b')">Submit</button>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question" id="q3">
+    <p><strong>3. ACH50 stands for ___.</strong></p>
+    <label><input type="radio" name="q3" value="a"> Air Changes per Hour at 50 °F</label>
+    <label><input type="radio" name="q3" value="b"> Air Cooling Hours at 50 % RH</label>
+    <label><input type="radio" name="q3" value="c"> Air Changes per Hour at 50 Pa</label>
+    <label><input type="radio" name="q3" value="d"> Annual Cooling Hours</label>
+    <div class="feedback">Correct answer: Air Changes per Hour at 50 Pa.</div>
+    <button onclick="checkAnswer('q3','c')">Submit</button>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="question" id="q4">
+    <p><strong>4. Which ACH50 value meets Passive House airtightness?</strong></p>
+    <label><input type="radio" name="q4" value="a"> 5 ACH50</label>
+    <label><input type="radio" name="q4" value="b"> 3 ACH50</label>
+    <label><input type="radio" name="q4" value="c"> 0.6 ACH50</label>
+    <label><input type="radio" name="q4" value="d"> 1.5 ACH50</label>
+    <div class="feedback">Correct answer: 0.6 ACH50 – Passive House limit.</div>
+    <button onclick="checkAnswer('q4','c')">Submit</button>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="question" id="q5">
+    <p><strong>5. Which item is a frequent cause of excessive leakage into attics?</strong></p>
+    <label><input type="radio" name="q5" value="a"> Over-insulated walls</label>
+    <label><input type="radio" name="q5" value="b"> Window shading</label>
+    <label><input type="radio" name="q5" value="c"> Recessed lighting</label>
+    <label><input type="radio" name="q5" value="d"> Indoor plants</label>
+    <div class="feedback">Correct answer: Recessed lighting – often not air-tight rated.</div>
+    <button onclick="checkAnswer('q5','c')">Submit</button>
+  </div>
+
+  <!-- Question 6 -->
+  <div class="question" id="q6">
+    <p><strong>6. The main goal of air sealing is to ___.</strong></p>
+    <label><input type="radio" name="q6" value="a"> Increase moisture</label>
+    <label><input type="radio" name="q6" value="b"> Reduce natural light</label>
+    <label><input type="radio" name="q6" value="c"> Decrease uncontrolled air leakage</label>
+    <label><input type="radio" name="q6" value="d"> Improve water flow</label>
+    <div class="feedback">Correct answer: Decrease uncontrolled air leakage.</div>
+    <button onclick="checkAnswer('q6','c')">Submit</button>
+  </div>
+
+  <!-- Question 7 -->
+  <div class="question" id="q7">
+    <p><strong>7. A common leakage site at floor level is the ___.</strong></p>
+    <label><input type="radio" name="q7" value="a"> Drywall</label>
+    <label><input type="radio" name="q7" value="b"> Rim joist</label>
+    <label><input type="radio" name="q7" value="c"> Roof shingles</label>
+    <label><input type="radio" name="q7" value="d"> Curtain rod</label>
+    <div class="feedback">Correct answer: Rim joist – perimeter framing at the edge of the floor.</div>
+    <button onclick="checkAnswer('q7','b')">Submit</button>
+  </div>
+
+  <!-- Question 8 -->
+  <div class="question" id="q8">
+    <p><strong>8. A high ACH50 value indicates ___.</strong></p>
+    <label><input type="radio" name="q8" value="a"> A tight envelope</label>
+    <label><input type="radio" name="q8" value="b"> Significant air leakage</label>
+    <label><input type="radio" name="q8" value="c"> Excellent insulation</label>
+    <label><input type="radio" name="q8" value="d"> Solar gain</label>
+    <div class="feedback">Correct answer: Significant air leakage.</div>
+    <button onclick="checkAnswer('q8','b')">Submit</button>
+  </div>
+
+  <!-- Question 9 -->
+  <div class="question" id="q9">
+    <p><strong>9. For many 1980s homes, a realistic post-retrofit target is below ___ ACH50.</strong></p>
+    <label><input type="radio" name="q9" value="a"> 10</label>
+    <label><input type="radio" name="q9" value="b"> 7</label>
+    <label><input type="radio" name="q9" value="c"> 3</label>
+    <label><input type="radio" name="q9" value="d"> 12</label>
+    <div class="feedback">Correct answer: 7 ACH50 – meets many retrofit code requirements.</div>
+    <button onclick="checkAnswer('q9','b')">Submit</button>
+  </div>
+
+  <!-- Question 10 -->
+  <div class="question" id="q10">
+    <p><strong>10. Which option will NOT reduce envelope leakage?</strong></p>
+    <label><input type="radio" name="q10" value="a"> Weather-stripping doors</label>
+    <label><input type="radio" name="q10" value="b"> Replacing light bulbs</label>
+    <label><input type="radio" name="q10" value="c"> Sealing can lights</label>
+    <label><input type="radio" name="q10" value="d"> Spray-foaming rim joists</label>
+    <div class="feedback">Correct answer: Replacing light bulbs.</div>
+    <button onclick="checkAnswer('q10','b')">Submit</button>
+  </div>
+
+  <!-- Question 11 -->
+  <div class="question" id="q11">
+    <p><strong>11. Depressurizing the house during a blower-door test helps ___.</strong></p>
+    <label><input type="radio" name="q11" value="a"> Increase temperature</label>
+    <label><input type="radio" name="q11" value="b"> Simulate summer heat</label>
+    <label><input type="radio" name="q11" value="c"> Reveal leakage paths</label>
+    <label><input type="radio" name="q11" value="d"> Test smoke alarms</label>
+    <div class="feedback">Correct answer: Reveal leakage paths by pulling outside air through cracks.</div>
+    <button onclick="checkAnswer('q11','c')">Submit</button>
+  </div>
+
+  <!-- Question 12 -->
+  <div class="question" id="q12">
+    <p><strong>12. Which energy code sets ≤ 5 ACH50 for Climate Zone 2?</strong></p>
+    <label><input type="radio" name="q12" value="a"> ASHRAE 62.1</label>
+    <label><input type="radio" name="q12" value="b"> PHIUS</label>
+    <label><input type="radio" name="q12" value="c"> IECC 2021</label>
+    <label><input type="radio" name="q12" value="d"> Title 24</label>
+    <div class="feedback">Correct answer: IECC 2021.</div>
+    <button onclick="checkAnswer('q12','c')">Submit</button>
+  </div>
+
+  <!-- Question 13 -->
+  <div class="question" id="q13">
+    <p><strong>13. A common ceiling-level bypass is ___.</strong></p>
+    <label><input type="radio" name="q13" value="a"> Wall outlets</label>
+    <label><input type="radio" name="q13" value="b"> Recessed lights</label>
+    <label><input type="radio" name="q13" value="c"> Baseboards</label>
+    <label><input type="radio" name="q13" value="d"> Carpet tack strip</label>
+    <div class="feedback">Correct answer: Recessed lights often vent to attics.</div>
+    <button onclick="checkAnswer('q13','b')">Submit</button>
+  </div>
+
+  <!-- Question 14 -->
+  <div class="question" id="q14">
+    <p><strong>14. What material is typically sprayed to seal attic top plates?</strong></p>
+    <label><input type="radio" name="q14" value="a"> Fiberglass batts</label>
+    <label><input type="radio" name="q14" value="b"> PVC glue</label>
+    <label><input type="radio" name="q14" value="c"> Two-part spray foam</label>
+    <label><input type="radio" name="q14" value="d"> Steel wool</label>
+    <div class="feedback">Correct answer: Two-part spray foam creates an air-tight seal.</div>
+    <button onclick="checkAnswer('q14','c')">Submit</button>
+  </div>
+
+  <!-- Question 15 -->
+  <div class="question" id="q15">
+    <p><strong>15. Which retrofit often yields the largest ACH50 drop for modest cost?</strong></p>
+    <label><input type="radio" name="q15" value="a"> Crawlspace liner & encapsulation</label>
+    <label><input type="radio" name="q15" value="b"> Weather-stripping front door</label>
+    <label><input type="radio" name="q15" value="c"> Dense-packing wall cavities</label>
+    <label><input type="radio" name="q15" value="d"> Boxing can lights</label>
+    <div class="feedback">Correct answer: Crawlspace liner & encapsulation.</div>
+    <button onclick="checkAnswer('q15','a')">Submit</button>
+  </div>
+
+  <!-- Question 16 -->
+  <div class="question" id="q16">
+    <p><strong>16. An insulated attic hatch primarily prevents ___.</strong></p>
+    <label><input type="radio" name="q16" value="a"> Rodent entry</label>
+    <label><input type="radio" name="q16" value="b"> Fire spread</label>
+    <label><input type="radio" name="q16" value="c"> Radiant solar gain</label>
+    <label><input type="radio" name="q16" value="d"> Air leakage between house and attic</label>
+    <div class="feedback">Correct answer: Air leakage between house and attic.</div>
+    <button onclick="checkAnswer('q16','d')">Submit</button>
+  </div>
+
+  <!-- Question 17 -->
+  <div class="question" id="q17">
+    <p><strong>17. Cutting ACH50 from 12 to 6 can reduce HVAC load roughly ___.</strong></p>
+    <label><input type="radio" name="q17" value="a"> 1 %</label>
+    <label><input type="radio" name="q17" value="b"> 10 %</label>
+    <label><input type="radio" name="q17" value="c"> 20 %</label>
+    <label><input type="radio" name="q17" value="d"> 50 %</label>
+    <div class="feedback">Correct answer: About 20 % load reduction.</div>
+    <button onclick="checkAnswer('q17','c')">Submit</button>
+  </div>
+
+  <!-- Question 18 -->
+  <div class="question" id="q18">
+    <p><strong>18. Which diagnostic test isolates duct leakage after a blower door?</strong></p>
+    <label><input type="radio" name="q18" value="a"> Smoke pencil</label>
+    <label><input type="radio" name="q18" value="b"> Infrared camera</label>
+    <label><input type="radio" name="q18" value="c"> Duct blaster</label>
+    <label><input type="radio" name="q18" value="d"> Guarded blower test</label>
+    <div class="feedback">Correct answer: Duct blaster pressurizes ducts separately.</div>
+    <button onclick="checkAnswer('q18','c')">Submit</button>
+  </div>
+
+  <!-- Question 19 -->
+  <div class="question" id="q19">
+    <p><strong>19. ENERGY STAR new-home programs typically require ≤ ___ ACH50.</strong></p>
+    <label><input type="radio" name="q19" value="a"> 2</label>
+    <label><input type="radio" name="q19" value="b"> 3</label>
+    <label><input type="radio" name="q19" value="c"> 4</label>
+    <label><input type="radio" name="q19" value="d"> 6</label>
+    <div class="feedback">Correct answer: 3 ACH50.</div>
+    <button onclick="checkAnswer('q19','b')">Submit</button>
+  </div>
+
+  <!-- Question 20 -->
+  <div class="question" id="q20">
+    <p><strong>20. What is the simplest DIY air-sealing task?</strong></p>
+    <label><input type="radio" name="q20" value="a"> Dense-packing walls</label>
+    <label><input type="radio" name="q20" value="b"> Crawlspace liner install</label>
+    <label><input type="radio" name="q20" value="c"> Caulking baseboards</label>
+    <label><input type="radio" name="q20" value="d"> Replacing HVAC system</label>
+    <div class="feedback">Correct answer: Caulking baseboards – quick, cheap, and effective.</div>
+    <button onclick="checkAnswer('q20','c')">Submit</button>
+  </div>
+
+  <script>
+    function checkAnswer(qId, correct){
+      const q = document.getElementById(qId);
+      const sel = q.querySelector('input[type="radio"]:checked');
+      if(!sel){return;}
+      const fb = q.querySelector('.feedback');
+      if(sel.value===correct){fb.style.display='block';fb.style.color='green';fb.innerHTML='Correct! '+fb.innerHTML;}
+      else{fb.style.display='block';fb.style.color='red';fb.innerHTML='Incorrect. '+fb.innerHTML;}
+    }
+  </script>
+</body>
+</html>
