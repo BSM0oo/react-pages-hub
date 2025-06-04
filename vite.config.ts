@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/react-pages-hub/',
-  // Include HTML files as static assets
-  assetsInclude: ['**/*.html']
+  // Remove assetsInclude for HTML files to prevent them from being bundled
+  // HTML files should be copied to public/pages/ instead
 })
