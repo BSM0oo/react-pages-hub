@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/copy-html.cjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "check-deps": "node scripts/check-dependencies.cjs",
@@ -13,7 +13,8 @@
     "generate-page": "node scripts/generate-page.cjs",
     "deps:check": "node scripts/check-dependencies.cjs --suggest",
     "deps:install": "node scripts/auto-install-deps.cjs",
-    "page:new": "node scripts/generate-page.cjs"
+    "page:new": "node scripts/generate-page.cjs",
+    "copy-html": "node scripts/copy-html.cjs"
   },
   "dependencies": {
     "lucide-react": "^0.511.0",

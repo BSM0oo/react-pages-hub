@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ray Dalio Interview Quiz</title>
+<style>
+  body {font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; background:#f4f9ff; color:#333}
+  h1, h2 {text-align:center; color:#004080}
+  .question {background:#fff; border:1px solid #ccc; border-radius:6px; padding:15px; margin-bottom:25px}
+  .question label {display:block; margin:6px 0}
+  .feedback {font-style:italic; margin-top:6px}
+  button {margin-top:10px; padding:6px 12px; border-radius:4px; border:none; background:#004080; color:#fff; cursor:pointer}
+  button:hover {background:#0066cc}
+  #resetBtn {background:#888}
+</style>
+</head>
+<body>
+<h1>Interactive Quiz: Ray Dalio on Systemic Risks</h1>
+<p>Choose the best answer for each question and click <strong>Submit</strong> to see if you’re correct. Use <strong>Reset Quiz</strong> at the bottom to clear all answers.</p>
+
+<script>
+function check(q, correct){
+  const sel=document.querySelector('input[name='+q+']:checked');
+  const fb=document.getElementById(q+'-fb');
+  if(!sel){fb.textContent='Select an answer first.';fb.style.color='orange';return;}
+  if(sel.value===correct){fb.textContent='Correct!';fb.style.color='green';}
+  else{
+    const label=document.querySelector('label[for="'+q+correct+'"]');
+    fb.textContent='Incorrect. Correct answer: '+label.textContent.slice(3);
+    fb.style.color='red';
+  }
+}
+function resetQuiz(){
+  document.querySelectorAll('input[type=radio]').forEach(e=>e.checked=false);
+  document.querySelectorAll('.feedback').forEach(e=>e.textContent='');
+}
+</script>
+
+<!-- Question Template -->
+<div class="question">
+<strong>1. Which of the following is <u>NOT</u> one of Dalio’s five major forces?</strong>
+<label for="q1a">a) Monetary and debt cycles</label>
+<input type="radio" id="q1a" name="q1" value="a">
+<label for="q1b">b) Domestic political order</label>
+<input type="radio" id="q1b" name="q1" value="b">
+<label for="q1c">c) Geopolitical order</label>
+<input type="radio" id="q1c" name="q1" value="c">
+<label for="q1d">d) Demographic aging</label>
+<input type="radio" id="q1d" name="q1" value="d">
+<button onclick="check('q1','d')">Submit</button>
+<div id="q1-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>2. Dalio compares today’s U.S. polarization to which decade?</strong>
+<label for="q2a">a) 1920s</label><input type="radio" id="q2a" name="q2" value="a">
+<label for="q2b">b) 1930s</label><input type="radio" id="q2b" name="q2" value="b">
+<label for="q2c">c) 1950s</label><input type="radio" id="q2c" name="q2" value="c">
+<label for="q2d">d) 1970s</label><input type="radio" id="q2d" name="q2" value="d">
+<button onclick="check('q2','b')">Submit</button>
+<div id="q2-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>3. According to Dalio, the U.S. fiscal deficit is roughly what percent of GDP?</strong>
+<label for="q3a">a) 3&nbsp;%</label><input type="radio" id="q3a" name="q3" value="a">
+<label for="q3b">b) 5&nbsp;%</label><input type="radio" id="q3b" name="q3" value="b">
+<label for="q3c">c) 7&nbsp;%</label><input type="radio" id="q3c" name="q3" value="c">
+<label for="q3d">d) 10&nbsp;%</label><input type="radio" id="q3d" name="q3" value="d">
+<button onclick="check('q3','c')">Submit</button>
+<div id="q3-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>4. Dalio’s “3&nbsp;% pledge” calls for:</strong>
+<label for="q4a">a) Unemployment below 3&nbsp;%</label><input type="radio" id="q4a" name="q4" value="a">
+<label for="q4b">b) Inflation capped at 3&nbsp;%</label><input type="radio" id="q4b" name="q4" value="b">
+<label for="q4c">c) Fiscal deficit limited to 3&nbsp;% of GDP</label><input type="radio" id="q4c" name="q4" value="c">
+<label for="q4d">d) Fed funds rate near 3&nbsp;%</label><input type="radio" id="q4d" name="q4" value="d">
+<button onclick="check('q4','c')">Submit</button>
+<div id="q4-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>5. In Dalio’s view, recent U.S. tariffs primarily:</strong>
+<label for="q5a">a) Rapidly fix trade imbalances</label><input type="radio" id="q5a" name="q5" value="a">
+<label for="q5b">b) Boost investor confidence</label><input type="radio" id="q5b" name="q5" value="b">
+<label for="q5c">c) Exacerbate supply-chain interdependencies</label><input type="radio" id="q5c" name="q5" value="c">
+<label for="q5d">d) Lower consumer prices</label><input type="radio" id="q5d" name="q5" value="d">
+<button onclick="check('q5','c')">Submit</button>
+<div id="q5-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>6. Dalio’s “flight from Treasuries” signal is:</strong>
+<label for="q6a">a) Dollar up, Gold up, Yields down</label><input type="radio" id="q6a" name="q6" value="a">
+<label for="q6b">b) Dollar down, Gold up, Yields up</label><input type="radio" id="q6b" name="q6" value="b">
+<label for="q6c">c) Dollar stable, Gold down, Yields down</label><input type="radio" id="q6c" name="q6" value="c">
+<label for="q6d">d) Dollar up, Gold down, Yields up</label><input type="radio" id="q6d" name="q6" value="d">
+<button onclick="check('q6','b')">Submit</button>
+<div id="q6-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>7. Dalio says roughly what fraction of Americans read below a 6th-grade level?</strong>
+<label for="q7a">a) 20&nbsp;%</label><input type="radio" id="q7a" name="q7" value="a">
+<label for="q7b">b) 35&nbsp;%</label><input type="radio" id="q7b" name="q7" value="b">
+<label for="q7c">c) 50&nbsp;%</label><input type="radio" id="q7c" name="q7" value="c">
+<label for="q7d">d) 70&nbsp;%</label><input type="radio" id="q7d" name="q7" value="d">
+<button onclick="check('q7','c')">Submit</button>
+<div id="q7-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>8. Which institution exemplifies the post-1945 American-led order?</strong>
+<label for="q8a">a) Asian Development Bank</label><input type="radio" id="q8a" name="q8" value="a">
+<label for="q8b">b) Asian Infrastructure Investment Bank</label><input type="radio" id="q8b" name="q8" value="b">
+<label for="q8c">c) International Monetary Fund (IMF)</label><input type="radio" id="q8c" name="q8" value="c">
+<label for="q8d">d) OECD</label><input type="radio" id="q8d" name="q8" value="d">
+<button onclick="check('q8','c')">Submit</button>
+<div id="q8-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>9. Key obstacle to rapid U.S. reshoring, per Dalio:</strong>
+<label for="q9a">a) Lack of cheap energy</label><input type="radio" id="q9a" name="q9" value="a">
+<label for="q9b">b) Insufficient skilled labor & bureaucratic hurdles</label><input type="radio" id="q9b" name="q9" value="b">
+<label for="q9c">c) High corporate taxes</label><input type="radio" id="q9c" name="q9" value="c">
+<label for="q9d">d) Strong labor unions</label><input type="radio" id="q9d" name="q9" value="d">
+<button onclick="check('q9','b')">Submit</button>
+<div id="q9-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>10. Dalio likens mishandled tariffs to which shock?</strong>
+<label for="q10a">a) Dot-com crash</label><input type="radio" id="q10a" name="q10" value="a">
+<label for="q10b">b) Great Depression</label><input type="radio" id="q10b" name="q10" value="b">
+<label for="q10c">c) COVID pandemic</label><input type="radio" id="q10c" name="q10" value="c">
+<label for="q10d">d) 1970s oil crisis</label><input type="radio" id="q10d" name="q10" value="d">
+<button onclick="check('q10','c')">Submit</button>
+<div id="q10-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>11. Interest rates are now more influential than _____, according to Dalio.</strong>
+<label for="q11a">a) Defense spending</label><input type="radio" id="q11a" name="q11" value="a">
+<label for="q11b">b) Social Security</label><input type="radio" id="q11b" name="q11" value="b">
+<label for="q11c">c) Changes in spending or taxes</label><input type="radio" id="q11c" name="q11" value="c">
+<label for="q11d">d) Infrastructure projects</label><input type="radio" id="q11d" name="q11" value="d">
+<button onclick="check('q11','c')">Submit</button>
+<div id="q11-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>12. Rising long-term yields during weakness suggest:</strong>
+<label for="q12a">a) Deflation fears</label><input type="radio" id="q12a" name="q12" value="a">
+<label for="q12b">b) Credit-risk flight from bonds</label><input type="radio" id="q12b" name="q12" value="b">
+<label for="q12c">c) QE expansion</label><input type="radio" id="q12c" name="q12" value="c">
+<label for="q12d">d) Yield-curve control</label><input type="radio" id="q12d" name="q12" value="d">
+<button onclick="check('q12','b')">Submit</button>
+<div id="q12-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>13. Which market does Dalio say underpins global asset pricing?</strong>
+<label for="q13a">a) U.S. equity market</label><input type="radio" id="q13a" name="q13" value="a">
+<label for="q13b">b) Commodity futures market</label><input type="radio" id="q13b" name="q13" value="b">
+<label for="q13c">c) U.S. Treasury market</label><input type="radio" id="q13c" name="q13" value="c">
+<label for="q13d">d) Cryptocurrency market</label><input type="radio" id="q13d" name="q13" value="d">
+<button onclick="check('q13','c')">Submit</button>
+<div id="q13-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>14. Dalio urges policymakers to monitor the supply-demand balance of:</strong>
+<label for="q14a">a) Labor</label><input type="radio" id="q14a" name="q14" value="a">
+<label for="q14b">b) Housing</label><input type="radio" id="q14b" name="q14" value="b">
+<label for="q14c">c) Treasuries</label><input type="radio" id="q14c" name="q14" value="c">
+<label for="q14d">d) Oil barrels</label><input type="radio" id="q14d" name="q14" value="d">
+<button onclick="check('q14','c')">Submit</button>
+<div id="q14-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>15. “Acts of nature” in Dalio’s model stress:</strong>
+<label for="q15a">a) Renewable energy upside</label><input type="radio" id="q15a" name="q15" value="a">
+<label for="q15b">b) Climate-change regulation</label><input type="radio" id="q15b" name="q15" value="b">
+<label for="q15c">c) Non-economic shocks like pandemics</label><input type="radio" id="q15c" name="q15" value="c">
+<label for="q15d">d) Agricultural subsidies</label><input type="radio" id="q15d" name="q15" value="d">
+<button onclick="check('q15','c')">Submit</button>
+<div id="q15-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>16. Under Dalio’s rebalancing, China should _____ and the U.S. should _____. </strong>
+<label for="q16a">a) Consume less / produce more</label><input type="radio" id="q16a" name="q16" value="a">
+<label for="q16b">b) Consume more / produce less</label><input type="radio" id="q16b" name="q16" value="b">
+<label for="q16c">c) Produce more / consume more</label><input type="radio" id="q16c" name="q16" value="c">
+<label for="q16d">d) Save less / invest less</label><input type="radio" id="q16d" name="q16" value="d">
+<button onclick="check('q16','b')">Submit</button>
+<div id="q16-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>17. Declining foreign Treasury ownership creates:</strong>
+<label for="q17a">a) Lower yields</label><input type="radio" id="q17a" name="q17" value="a">
+<label for="q17b">b) Greater domestic savings</label><input type="radio" id="q17b" name="q17" value="b">
+<label for="q17c">c) Larger funding gap for U.S. deficits</label><input type="radio" id="q17c" name="q17" value="c">
+<label for="q17d">d) Stronger dollar index</label><input type="radio" id="q17d" name="q17" value="d">
+<button onclick="check('q17','c')">Submit</button>
+<div id="q17-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>18. Institutions that must be rescued are labeled:</strong>
+<label for="q18a">a) Fin-techs</label><input type="radio" id="q18a" name="q18" value="a">
+<label for="q18b">b) Unicorns</label><input type="radio" id="q18b" name="q18" value="b">
+<label for="q18c">c) Too big to fail</label><input type="radio" id="q18c" name="q18" value="c">
+<label for="q18d">d) Public utilities</label><input type="radio" id="q18d" name="q18" value="d">
+<button onclick="check('q18','c')">Submit</button>
+<div id="q18-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>19. Dalio links low literacy directly to:</strong>
+<label for="q19a">a) Productivity & competitiveness</label><input type="radio" id="q19a" name="q19" value="a">
+<label for="q19b">b) Stock prices</label><input type="radio" id="q19b" name="q19" value="b">
+<label for="q19c">c) Oil demand</label><input type="radio" id="q19c" name="q19" value="c">
+<label for="q19d">d) Pension liabilities</label><input type="radio" id="q19d" name="q19" value="d">
+<button onclick="check('q19','a')">Submit</button>
+<div id="q19-fb" class="feedback"></div>
+</div>
+
+<div class="question">
+<strong>20. In crises, regulators should keep _____, says Dalio.</strong>
+<label for="q20a">a) Strict rule-based processes only</label><input type="radio" id="q20a" name="q20" value="a">
+<label for="q20b">b) Complete laissez-faire</label><input type="radio" id="q20b" name="q20" value="b">
+<label for="q20c">c) Discretion & flexibility</label><input type="radio" id="q20c" name="q20" value="c">
+<label for="q20d">d) Outsourced decision-making</label><input type="radio" id="q20d" name="q20" value="d">
+<button onclick="check('q20','c')">Submit</button>
+<div id="q20-fb" class="feedback"></div>
+</div>
+
+<button id="resetBtn" onclick="resetQuiz()">Reset Quiz</button>
+
+</body>
+</html>
