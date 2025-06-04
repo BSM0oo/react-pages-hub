@@ -4,7 +4,14 @@ This document details the complete process of setting up the React Pages Hub wit
 
 ## 🎯 Project Overview
 
-The React Pages Hub is a modern React application that automatically discovers `.tsx` files in the `src/pages/` directory and displays them in a beautiful table of contents interface. It features automatic deployment to GitHub Pages with real-time updates.
+The React Pages Hub is a modern React application that automatically discovers both `.tsx` React components and `.html` files in the `src/pages/` directory and displays them in a beautiful table of contents interface. It features:
+
+- **Dual Content Support**: React components (.tsx) for interactive pages and static HTML files for standalone content
+- **Automatic Discovery**: New files automatically appear in the interface without code changes
+- **Visual Distinction**: HTML files display with globe icon and green styling, React components with file icon and blue styling
+- **Smart Navigation**: React components use client-side routing, HTML files open in new tabs for security
+- **Automated Build Process**: HTML files are automatically copied to public directory during build
+- **GitHub Pages Deployment**: Automatic deployment with real-time updates for both file types
 
 ## 📋 Prerequisites
 
@@ -28,10 +35,65 @@ npm install
 ### 2. Core Dependencies
 
 Key dependencies installed:
+
 ```bash
 npm install react-router-dom
 npm install -D tailwindcss postcss autoprefixer
 npm install -D @tailwindcss/postcss  # Critical for production builds
+```
+
+### 3. HTML File Support Setup
+
+The application supports both React components (.tsx) and static HTML files (.html) with automatic build process:
+
+#### 3.1 Build Script Configuration (`package.json`)
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/copy-html.cjs && vite build",
+    "copy-html": "node scripts/copy-html.cjs",
+    "preview": "vite preview"
+  }
+}
+```
+
+#### 3.2 HTML Copy Script (`scripts/copy-html.cjs`)
+
+Create the automation script to copy HTML files from `src/pages/` to `public/pages/`:
+
+```javascript
+const fs = require("fs");
+const path = require("path");
+
+const srcDir = path.join(__dirname, "../src/pages");
+const destDir = path.join(__dirname, "../public/pages");
+
+// Ensure destination directory exists
+if (!fs.existsSync(destDir)) {
+  fs.mkdirSync(destDir, { recursive: true });
+  console.log("Created directory:", destDir);
+}
+
+// Copy HTML files
+if (fs.existsSync(srcDir)) {
+  const files = fs.readdirSync(srcDir);
+  const htmlFiles = files.filter((file) => file.endsWith(".html"));
+
+  htmlFiles.forEach((file) => {
+    const srcPath = path.join(srcDir, file);
+    const destPath = path.join(destDir, file);
+    fs.copyFileSync(srcPath, destPath);
+    console.log(`Copied: ${file}`);
+  });
+
+  if (htmlFiles.length === 0) {
+    console.log("No HTML files found to copy");
+  }
+} else {
+  console.log("Source directory does not exist:", srcDir);
+}
 ```
 
 ### 3. Critical Configuration Files
@@ -41,13 +103,14 @@ npm install -D @tailwindcss/postcss  # Critical for production builds
 **🔧 CRITICAL FIX**: The `base` path must match your GitHub repository name:
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: '/react-pages-hub/',  // Must match GitHub repo name!
-})
+  base: "/react-pages-hub/", // Must match GitHub repo name!
+  assetsInclude: ["**/*.html"], // Enable HTML file handling
+});
 ```
 
 **❌ Common Error**: Using wrong base path (e.g., `/tableofcontentsreactapp/` when repo is named `react-pages-hub`) causes 404 errors for all assets.
@@ -57,19 +120,21 @@ export default defineConfig({
 **🔧 CRITICAL FIX**: The `basename` must match the Vite `base` path:
 
 ```typescript
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import App from './App'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter basename="/react-pages-hub">  {/* Must match Vite base! */}
+    <BrowserRouter basename="/react-pages-hub">
+      {" "}
+      {/* Must match Vite base! */}
       <App />
     </BrowserRouter>
   </React.StrictMode>
-)
+);
 ```
 
 **❌ Common Error**: Mismatched basename causes React Router to not render anything, resulting in blank pages.
@@ -77,31 +142,31 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 #### 3.3 Tailwind CSS Configuration
 
 **PostCSS Config (`postcss.config.js`)**:
+
 ```javascript
 export default {
   plugins: {
-    '@tailwindcss/postcss': {},  // Use new separate package
+    "@tailwindcss/postcss": {}, // Use new separate package
     autoprefixer: {},
   },
-}
+};
 ```
 
 **Tailwind Config (`tailwind.config.js`)**:
+
 ```javascript
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};
 ```
 
 **CSS (`src/index.css`)**:
+
 ```css
 @tailwind base;
 @tailwind components;
@@ -144,14 +209,14 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     permissions:
       contents: read
       pages: write
@@ -162,32 +227,32 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build
+      - name: Build
+        run: npm run build
 
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
-    - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: './dist'
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "./dist"
 
-    - name: Deploy to GitHub Pages
-      id: deployment
-      uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
 ## 🔧 Critical Fixes and Troubleshooting
@@ -198,7 +263,8 @@ jobs:
 
 **Root Cause**: Mismatch between Vite `base` path and actual GitHub repository name.
 
-**Solution**: 
+**Solution**:
+
 1. Ensure `vite.config.ts` `base` matches your GitHub repo name exactly
 2. Ensure React Router `basename` matches the Vite `base`
 
@@ -216,7 +282,8 @@ jobs:
 
 **Root Cause**: Tailwind CSS v4+ moved PostCSS plugin to separate package.
 
-**Solution**: 
+**Solution**:
+
 1. Install `@tailwindcss/postcss`
 2. Update `postcss.config.js` to use `'@tailwindcss/postcss'`
 
@@ -230,37 +297,46 @@ jobs:
 
 ## 📁 File Structure
 
-```
+```text
 react-pages-hub/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml          # GitHub Actions workflow
+├── public/
+│   └── pages/                  # Auto-generated HTML files (build output)
+│       └── *.html             # Copied from src/pages/
+├── scripts/
+│   └── copy-html.cjs          # HTML file copy automation
 ├── src/
 │   ├── pages/                  # Auto-discovered pages go here
-│   │   ├── AboutPage.tsx
+│   │   ├── AboutPage.tsx      # React components
 │   │   ├── ContactPage.tsx
 │   │   ├── ExamplePage.tsx
 │   │   ├── TestPage.tsx
-│   │   └── market-relationships-charts.tsx
+│   │   ├── market-relationships-charts.tsx
+│   │   ├── daliochatgptquiz.html    # HTML files
+│   │   └── bond-yield-quiz2.tsx
 │   ├── App.tsx                 # Main app with routing
 │   ├── main.tsx               # Entry point with Router config
 │   ├── TableOfContents.tsx    # Auto-discovery component
 │   └── index.css              # Tailwind CSS imports
-├── vite.config.ts             # Vite config with base path
+├── vite.config.ts             # Vite config with base path & HTML support
 ├── tailwind.config.js         # Tailwind configuration
 ├── postcss.config.js          # PostCSS configuration
-└── package.json
+└── package.json               # Build scripts with HTML copy
 ```
 
 ## 🎯 Testing the Setup
 
 ### Local Testing
+
 1. Run `npm run dev`
 2. Navigate to `http://localhost:5173/react-pages-hub/`
 3. Verify all pages appear in table of contents
 4. Test navigation to individual pages
 
 ### Production Testing
+
 1. Push changes to GitHub
 2. Wait for GitHub Actions to complete (1-2 minutes)
 3. Visit `https://YOUR_USERNAME.github.io/react-pages-hub/`
@@ -271,6 +347,7 @@ react-pages-hub/
 To add a new page:
 
 1. Create a new `.tsx` file in `src/pages/`:
+
 ```typescript
 // src/pages/MyNewPage.tsx
 export default function MyNewPage() {
@@ -284,6 +361,7 @@ export default function MyNewPage() {
 ```
 
 2. Commit and push:
+
 ```bash
 git add src/pages/MyNewPage.tsx
 git commit -m "Add MyNewPage"
@@ -295,6 +373,7 @@ git push
 ## 🏆 Final Verification
 
 Your setup is complete when:
+
 - ✅ Local development server shows all pages
 - ✅ GitHub Actions workflows complete successfully
 - ✅ GitHub Pages site loads without errors
@@ -304,6 +383,7 @@ Your setup is complete when:
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check the GitHub Actions logs for build errors
 2. Verify all configuration files match the examples above
 3. Ensure repository name matches the `base` and `basename` paths
