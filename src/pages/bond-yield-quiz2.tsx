@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, TrendingUp, TrendingDown, DollarSign, BarChart3, CheckCircle, XCircle, RotateCcw, Trophy, Brain } from 'lucide-react';
+import { ChevronRight, ChevronLeft, TrendingUp, TrendingDown, BarChart3, CheckCircle, XCircle, RotateCcw, Trophy, Brain } from 'lucide-react';
 
 const BondYieldQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [quizComplete, setQuizComplete] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);

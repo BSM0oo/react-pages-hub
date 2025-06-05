@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
-import { TrendingUp, TrendingDown, AlertTriangle, DollarSign, Coins, BarChart3, Activity, ArrowUp, ArrowDown, Minus } from 'lucide-react';
+import React, { useState } from 'react';
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { AlertTriangle, BarChart3, ArrowUp, ArrowDown, Minus } from 'lucide-react';
 
 const MarketRelationshipsCharts = () => {
   const [activeScenario, setActiveScenario] = useState('neutral');
   const [activeCrisis, setActiveCrisis] = useState('normal');
-  const [animationStep, setAnimationStep] = useState(0);
 
   // Normal market scenarios data
   const normalScenarios = {
@@ -175,13 +174,6 @@ const MarketRelationshipsCharts = () => {
     }
   };
 
-  // Animation effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setAnimationStep(prev => (prev + 1) % 100);
-    }, 50);
-    return () => clearInterval(timer);
-  }, []);
 
   const getDirectionIcon = (direction) => {
     switch(direction) {
@@ -296,7 +288,7 @@ const MarketRelationshipsCharts = () => {
               {/* Asset Cards */}
               <div className="space-y-3">
                 <h4 className="font-semibold">Live Impact Analysis</h4>
-                {normalScenarios[activeScenario].data.map((asset, index) => (
+                {normalScenarios[activeScenario].data.map((asset) => (
                   <div key={asset.asset} className="bg-gray-50 rounded-lg p-4 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
@@ -392,7 +384,7 @@ const MarketRelationshipsCharts = () => {
               {/* Crisis Asset Analysis */}
               <div className="space-y-3">
                 <h4 className="font-semibold">Crisis Response Analysis</h4>
-                {crisisScenarios[activeCrisis].data.map((asset, index) => (
+                {crisisScenarios[activeCrisis].data.map((asset) => (
                   <div key={asset.asset} className="bg-gray-50 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-2">
                       <div className="font-semibold">{asset.asset}</div>

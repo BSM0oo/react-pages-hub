@@ -19,7 +19,9 @@ tableofcontentsreactapp/
 │   │   ├── AboutPage.tsx
 │   │   ├── ContactPage.tsx
 │   │   ├── ExamplePage.tsx
-│   │   └── market-relationships-charts.tsx
+│   │   ├── market-relationships-charts.tsx
+│   │   └── economic-indicators-dashboard/
+│   │       └── index.html
 │   ├── App.tsx                   # Main app component
 │   ├── TableOfContents.tsx       # Auto-detection logic
 │   ├── main.tsx                  # App entry point
@@ -86,6 +88,11 @@ const modules = import.meta.glob('./pages/*.tsx', { eager: true })
    }
    ```
 3. The page will automatically appear in the table of contents
+
+You can also add standalone HTML pages. Place an `index.html` (along with any
+scripts or styles) inside a folder under `src/pages/`. The entire folder will be
+copied to `public/pages/` during the build and the page will show up in the
+table of contents.
 
 ## 🌐 GitHub Pages Deployment
 
