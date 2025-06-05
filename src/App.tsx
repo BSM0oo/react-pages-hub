@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 import TableOfContents from './TableOfContents'
 
 // import all page modules eagerly
-const modules = import.meta.glob('./pages/*.tsx', { eager: true })
+const modules = import.meta.glob<{
+  default: React.ComponentType<unknown>
+}>('./pages/*.tsx', { eager: true })
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
         // extract filename without extension
         const nameMatch = path.match(/\.\/pages\/(.*)\.tsx$/)
         const name = nameMatch ? nameMatch[1] : ''
-        const Component = (modules[path] as any).default
+        const Component = modules[path].default
         return <Route key={name} path={`/${name}`} element={<Component />} />
       })}
     </Routes>

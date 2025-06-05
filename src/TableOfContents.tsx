@@ -5,13 +5,17 @@ import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe } from 'luci
 // eager:true so modules have .default immediately
 const modules = import.meta.glob('./pages/*.tsx', { eager: true })
 
-// Get HTML files manually - these should be in public/pages/ directory
-// We'll scan for HTML files in src/pages and assume they're copied to public/pages
-const htmlModules = import.meta.glob('./pages/*.html', { eager: false })
-const htmlFileNames = Object.keys(htmlModules).map(path => {
-  const name = path.match(/\.\/pages\/(.*)\.html$/)?.[1]
-  return name
-}).filter(Boolean)
+// Get HTML files manually - these may live in subdirectories under src/pages
+// They are copied to public/pages/ with the same folder structure
+const htmlModules = import.meta.glob('./pages/**/*.html', { eager: false })
+const htmlFiles = Object.keys(htmlModules).map(filePath => {
+  const relative = filePath.replace('./pages/', '')
+  let name = relative.replace(/\.html$/, '')
+  if (name.endsWith('/index')) {
+    name = name.slice(0, -6) // remove '/index'
+  }
+  return { name, relative }
+})
 
 export default function TableOfContents() {
   // derive page names from file paths for TSX files
@@ -30,7 +34,7 @@ export default function TableOfContents() {
   })
 
   // derive page names from file paths for HTML files
-  const htmlEntries = htmlFileNames.map((name) => {
+  const htmlEntries = htmlFiles.map(({ name, relative }) => {
     if (!name) return null
     // Convert kebab-case and camelCase to readable titles
     const title = name
@@ -40,11 +44,11 @@ export default function TableOfContents() {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ')
       .trim()
-    
+
     // HTML files will be accessible from the public/pages directory
     // We need to use the base URL for proper routing
     const basePath = import.meta.env.BASE_URL || '/'
-    return { name, path: `${basePath}pages/${name}.html`, title, type: 'html' as const }
+    return { name, path: `${basePath}pages/${relative}`, title, type: 'html' as const }
   }).filter(Boolean) as Array<{ name: string; path: string; title: string; type: 'html' }>
 
   // Combine all entries
@@ -278,7 +282,9 @@ export default function TableOfContents() {
 ├── UserProfile.tsx      → /UserProfile (React Router)
 ├── data-charts.tsx      → /data-charts (React Router)
 ├── quiz-game.html       → Direct HTML page
-└── landing-page.html    → Direct HTML page`}
+├── landing-page.html    → Direct HTML page
+└── economic-indicators-dashboard/
+    └── index.html       → Folder with static assets`}
             </pre>
           </div>
         </div>
