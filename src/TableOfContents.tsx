@@ -64,7 +64,7 @@ export default function TableOfContents() {
               <div className="p-3 bg-blue-600 rounded-xl">
                 <FileText className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-4xl font-bold text-gray-900">React Pages Hub</h1>
+              <h1 className="text-4xl font-bold text-gray-900">My React Pages Hub</h1>
             </div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               A modern, mobile-friendly dashboard for accessing your React components and HTML pages. 
@@ -77,35 +77,6 @@ export default function TableOfContents() {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         
-        {/* Features Banner */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-            ✨ Features
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Smartphone className="w-6 h-6 text-green-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Mobile Optimized</h3>
-              <p className="text-sm text-gray-600">Perfect for viewing on mobile Safari and all devices</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Monitor className="w-6 h-6 text-blue-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Auto-Detection</h3>
-              <p className="text-sm text-gray-600">New .tsx and .html files automatically appear in real-time</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Github className="w-6 h-6 text-purple-600" />
-              </div>
-              <h3 className="font-semibold text-gray-800 mb-2">GitHub Pages</h3>
-              <p className="text-sm text-gray-600">Automatically deploys when you push to GitHub</p>
-            </div>
-          </div>
-        </div>
 
         {/* Pages Grid */}
         <div className="mb-8">
@@ -221,7 +192,7 @@ export default function TableOfContents() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Create a new .tsx file</h4>
-                    <p className="text-gray-600 text-sm">Add your React component to the <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code> folder</p>
+                    <p className="text-gray-600 text-sm">Place it directly inside the <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code> folder (no subfolders)</p>
                   </div>
                 </div>
                 
@@ -241,7 +212,7 @@ export default function TableOfContents() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Automatic routing</h4>
-                    <p className="text-gray-600 text-sm">Your page will be accessible via React Router navigation</p>
+                    <p className="text-gray-600 text-sm">Your page will appear automatically at <code className="bg-gray-100 px-2 py-1 rounded text-xs">/your-file-name</code></p>
                   </div>
                 </div>
               </div>
@@ -256,8 +227,8 @@ export default function TableOfContents() {
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-1">Create a new .html file</h4>
-                    <p className="text-gray-600 text-sm">Add your HTML page to the <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code> folder</p>
+                    <h4 className="font-semibold text-gray-800 mb-1">Add your HTML page</h4>
+                    <p className="text-gray-600 text-sm">Place the .html file (or a folder with an <code className="bg-gray-100 px-2 py-1 rounded text-xs">index.html</code>) inside <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code></p>
                   </div>
                 </div>
                 
@@ -267,7 +238,7 @@ export default function TableOfContents() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Direct access</h4>
-                    <p className="text-gray-600 text-sm">Your HTML page will open directly in a new tab when clicked</p>
+                    <p className="text-gray-600 text-sm">It will be copied to <code className="bg-gray-100 px-2 py-1 rounded text-xs">public/pages/</code> and open directly in a new tab</p>
                   </div>
                 </div>
               </div>
@@ -286,6 +257,36 @@ export default function TableOfContents() {
 └── economic-indicators-dashboard/
     └── index.html       → Folder with static assets`}
             </pre>
+          </div>
+        </div>
+      </div>
+
+      {/* Features Banner */}
+      <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+          ✨ Features
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Smartphone className="w-6 h-6 text-green-600" />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-2">Mobile Optimized</h3>
+            <p className="text-sm text-gray-600">Perfect for viewing on mobile Safari and all devices</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Monitor className="w-6 h-6 text-blue-600" />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-2">Auto-Detection</h3>
+            <p className="text-sm text-gray-600">New .tsx and .html files automatically appear in real-time</p>
+          </div>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Github className="w-6 h-6 text-purple-600" />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-2">GitHub Pages</h3>
+            <p className="text-sm text-gray-600">Automatically deploys when you push to GitHub</p>
           </div>
         </div>
       </div>
