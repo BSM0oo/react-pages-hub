@@ -247,7 +247,7 @@ export default function TableOfContents() {
           
           <div className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200">
             <h4 className="font-semibold text-blue-800 mb-2">Example file structure:</h4>
-            <pre className="text-sm text-blue-700 font-mono">
+            <pre className="text-sm text-blue-700 font-mono whitespace-pre-wrap break-words">
 {`src/pages/
 ├── my-dashboard.tsx     → /my-dashboard (React Router)
 ├── example-page.jsx     → /example-page (React Router)
