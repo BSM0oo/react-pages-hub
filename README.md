@@ -163,9 +163,17 @@ The project includes several example pages:
 
 This project is open source and available under the MIT License.
 
+## 🔎 Roadmap
+
+- **Simplified Page Creation**: Provide CLI tools and templates so new pages can be added with minimal setup.
+- **Flexible Page Types**: Allow additional formats such as Markdown/MDX and plain HTML so a wider variety of content can be plugged in easily.
+- **CSV to Quiz Workflow**: Support uploading a CSV file of questions and answers that automatically generates an interactive quiz page.
+- **Extensible Plugin System**: Create hooks for future page types or data sources to be added without touching the core code base.
+- **Improved Docs**: Expand documentation with tutorials for new page types and data-driven features.
+
 ## 🆘 Troubleshooting
 
--### Page Not Appearing
+### Page Not Appearing
 - Ensure your file is in `src/pages/` directory
 - Check that it has a `.tsx` or `.jsx` extension
 - Verify the component is exported as default
