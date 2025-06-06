@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe, Search } from 'lucide-react'
 
@@ -17,8 +18,19 @@ const htmlFiles = Object.keys(htmlModules).map(filePath => {
   return { name, relative }
 })
 
+function parseDateFromName(name: string): Date | null {
+  const match = name.match(/^(\d{6})[-_]/)
+  if (!match) return null
+  const [yy, mm, dd] = [match[1].slice(0, 2), match[1].slice(2, 4), match[1].slice(4, 6)]
+  const year = 2000 + Number(yy)
+  const month = Number(mm) - 1
+  const day = Number(dd)
+  return new Date(year, month, day)
+}
+
 export default function TableOfContents() {
   const [query, setQuery] = useState('')
+  const [sortOption, setSortOption] = useState<'title-asc' | 'title-desc' | 'date-new' | 'date-old'>('title-asc')
   // derive page names from file paths for TSX files
   const tsxEntries = Object.keys(modules).map((path) => {
     const name = path.match(/\.\/pages\/(.*)\.(?:tsx|jsx)$/)?.[1] || 'unknown'
@@ -30,8 +42,10 @@ export default function TableOfContents() {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
       .join(' ')
       .trim()
-    
-    return { name, path: `/${name}`, title, type: 'tsx' as const }
+
+    const date = parseDateFromName(name)
+
+    return { name, path: `/${name}`, title, type: 'tsx' as const, date }
   })
 
   // derive page names from file paths for HTML files
@@ -49,14 +63,26 @@ export default function TableOfContents() {
     // HTML files will be accessible from the public/pages directory
     // We need to use the base URL for proper routing
     const basePath = import.meta.env.BASE_URL || '/'
-    return { name, path: `${basePath}pages/${relative}`, title, type: 'html' as const }
-  }).filter(Boolean) as Array<{ name: string; path: string; title: string; type: 'html' }>
+    const date = parseDateFromName(name)
+    return { name, path: `${basePath}pages/${relative}`, title, type: 'html' as const, date }
+  }).filter(Boolean) as Array<{ name: string; path: string; title: string; type: 'html'; date: Date | null }>
 
   // Combine all entries
   const entries = [...tsxEntries, ...htmlEntries]
   const filteredEntries = entries.filter(e =>
     e.title.toLowerCase().includes(query.toLowerCase())
   )
+
+  const sortedEntries = [...filteredEntries].sort((a, b) => {
+    if (sortOption.startsWith('title')) {
+      const result = a.title.localeCompare(b.title)
+      return sortOption === 'title-desc' ? -result : result
+    } else {
+      const aDate = a.date ? a.date.getTime() : 0
+      const bDate = b.date ? b.date.getTime() : 0
+      return sortOption === 'date-old' ? aDate - bDate : bDate - aDate
+    }
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -88,9 +114,27 @@ export default function TableOfContents() {
             <h2 className="text-2xl font-bold text-gray-800">
               Available Pages ({filteredEntries.length})
             </h2>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
                 Auto-updated
+              </div>
+              <div className="flex gap-2">
+                {['title-asc','title-desc','date-new','date-old'].map(opt => (
+                  <button
+                    key={opt}
+                    onClick={() => setSortOption(opt as 'title-asc' | 'title-desc' | 'date-new' | 'date-old')}
+                    className={`px-2 py-1 text-sm rounded-md border ${
+                      sortOption === opt
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    {opt === 'title-asc' && 'Title A-Z'}
+                    {opt === 'title-desc' && 'Title Z-A'}
+                    {opt === 'date-new' && 'Newest'}
+                    {opt === 'date-old' && 'Oldest'}
+                  </button>
+                ))}
               </div>
               <div className="relative">
                 <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -113,7 +157,7 @@ export default function TableOfContents() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredEntries.map(({ name, path, title, type }) => {
+              {sortedEntries.map(({ name, path, title, type, date }) => {
                 // For HTML files, use a regular anchor tag to navigate directly to the file
                 // For TSX files, use React Router Link
                 const isHtml = type === 'html'
@@ -139,8 +183,11 @@ export default function TableOfContents() {
                       {title}
                     </h3>
                     
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-sm text-gray-500">
                       {isHtml ? 'File:' : 'Component:'} {name}
+                    </p>
+                    <p className="text-xs text-gray-400 mb-4">
+                      {date ? `Uploaded ${format(date, 'yyyy-MM-dd')}` : 'Uploaded N/A'}
                     </p>
                     
                     <div className="flex items-center justify-between">
