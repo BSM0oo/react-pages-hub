@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe } from 'lucide-react'
+import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe, Search } from 'lucide-react'
 
 // eager:true so modules have .default immediately
 const modules = import.meta.glob('./pages/*.tsx', { eager: true })
@@ -18,6 +18,7 @@ const htmlFiles = Object.keys(htmlModules).map(filePath => {
 })
 
 export default function TableOfContents() {
+  const [query, setQuery] = useState('')
   // derive page names from file paths for TSX files
   const tsxEntries = Object.keys(modules).map((path) => {
     const name = path.match(/\.\/pages\/(.*)\.tsx$/)?.[1] || 'unknown'
@@ -53,6 +54,9 @@ export default function TableOfContents() {
 
   // Combine all entries
   const entries = [...tsxEntries, ...htmlEntries]
+  const filteredEntries = entries.filter(e =>
+    e.title.toLowerCase().includes(query.toLowerCase())
+  )
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -80,16 +84,28 @@ export default function TableOfContents() {
 
         {/* Pages Grid */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <h2 className="text-2xl font-bold text-gray-800">
-              Available Pages ({entries.length})
+              Available Pages ({filteredEntries.length})
             </h2>
-            <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-              Auto-updated
+            <div className="flex items-center gap-3">
+              <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                Auto-updated
+              </div>
+              <div className="relative">
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="pl-8 pr-3 py-2 border border-gray-300 rounded-md bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                />
+              </div>
             </div>
           </div>
 
-          {entries.length === 0 ? (
+          {filteredEntries.length === 0 ? (
             <div className="text-center py-12 bg-white rounded-2xl shadow-lg border border-gray-100">
               <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No pages found</h3>
@@ -97,7 +113,7 @@ export default function TableOfContents() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {entries.map(({ name, path, title, type }) => {
+              {filteredEntries.map(({ name, path, title, type }) => {
                 // For HTML files, use a regular anchor tag to navigate directly to the file
                 // For TSX files, use React Router Link
                 const isHtml = type === 'html'

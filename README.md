@@ -9,6 +9,7 @@ A modern, mobile-friendly React application that serves as a dynamic hub for acc
 - **Mobile Optimized**: Perfect viewing experience on mobile Safari and all devices
 - **GitHub Pages Ready**: Automatic deployment when pushing to GitHub
 - **Modern Design**: Clean, responsive interface with Tailwind CSS
+- **Searchable**: Quickly filter pages with built-in search
 
 ## 📁 Project Structure
 
