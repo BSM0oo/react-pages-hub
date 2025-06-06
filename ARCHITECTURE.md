@@ -16,7 +16,7 @@ React Pages Hub
 
 ```mermaid
 graph TD
-    A[Add .tsx file to src/pages/] --> B[Vite glob() detects file]
+    A[Add .tsx or .jsx file to src/pages/] --> B[Vite glob() detects file]
     B --> C[TableOfContents.tsx processes]
     C --> D[Generate route & title]
     D --> E[Update UI automatically]
@@ -64,7 +64,7 @@ function scanForImports(dir) {
   const files = fs.readdirSync(dir, { recursive: true });
   
   files.forEach(file => {
-    if (file.endsWith('.tsx') || file.endsWith('.ts')) {
+    if (file.endsWith('.tsx') || file.endsWith('.ts') || file.endsWith('.jsx') || file.endsWith('.js')) {
       const content = fs.readFileSync(path.join(dir, file), 'utf8');
       const importMatches = content.match(/import.*from ['"]([^'"]+)['"]/g);
       
@@ -269,7 +269,7 @@ tableofcontentsreactapp/
 1. **Create the page file:**
    ```bash
    # Create in src/pages/
-   touch src/pages/my-new-dashboard.tsx
+   touch src/pages/my-new-dashboard.tsx # or my-new-dashboard.jsx
    ```
 
 2. **Basic template:**
@@ -297,7 +297,7 @@ tableofcontentsreactapp/
 
 1. **Create the page:**
    ```tsx
-   // src/pages/3d-visualization.tsx
+   // src/pages/3d-visualization.tsx (or .jsx)
    import React from 'react';
    import { Canvas } from '@react-three/fiber';  // ❌ Not installed
    import { OrbitControls } from '@react-three/drei';  // ❌ Not installed
@@ -442,7 +442,7 @@ export default function ${toPascalCase(pageName)}() {
   };
   
   const content = templates[template] || templates.basic;
-  const fileName = `${pageName}.tsx`;
+  const fileName = `${pageName}.tsx`; // or .jsx
   const filePath = path.join(__dirname, '../src/pages', fileName);
   
   fs.writeFileSync(filePath, content);

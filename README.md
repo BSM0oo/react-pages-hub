@@ -1,10 +1,10 @@
 # React Pages Hub
 
-A modern, mobile-friendly React application that serves as a dynamic hub for accessing rendered React pages (.tsx files). Perfect for mobile Safari and all devices.
+A modern, mobile-friendly React application that serves as a dynamic hub for accessing rendered React pages (.tsx or .jsx files). Perfect for mobile Safari and all devices.
 
 ## 🚀 Features
 
-- **Auto-Detection**: Automatically detects and displays new .tsx files added to the `src/pages/` folder
+- **Auto-Detection**: Automatically detects and displays new .tsx or .jsx files added to the `src/pages/` folder
 - **Real-Time Updates**: Changes appear instantly when running the development server
 - **Mobile Optimized**: Perfect viewing experience on mobile Safari and all devices
 - **GitHub Pages Ready**: Automatic deployment when pushing to GitHub
@@ -15,7 +15,7 @@ A modern, mobile-friendly React application that serves as a dynamic hub for acc
 ```
 tableofcontentsreactapp/
 ├── src/
-│   ├── pages/                    # Add your .tsx files here
+│   ├── pages/                    # Add your .tsx or .jsx files here
 │   │   ├── AboutPage.tsx
 │   │   ├── ContactPage.tsx
 │   │   ├── ExamplePage.tsx
@@ -37,10 +37,10 @@ tableofcontentsreactapp/
 ## 🛠️ How It Works
 
 ### Auto-Detection System
-The app uses Vite's `import.meta.glob()` to automatically scan the `src/pages/` directory for `.tsx` files:
+The app uses Vite's `import.meta.glob()` to automatically scan the `src/pages/` directory for `.tsx` and `.jsx` files:
 
 ```typescript
-const modules = import.meta.glob('./pages/*.tsx', { eager: true })
+const modules = import.meta.glob('./pages/*.{tsx,jsx}', { eager: true })
 ```
 
 ### File Naming Convention
@@ -48,6 +48,7 @@ const modules = import.meta.glob('./pages/*.tsx', { eager: true })
 - `kebab-case` and `camelCase` are converted to "Title Case"
 - Examples:
   - `my-dashboard.tsx` → "My Dashboard"
+  - `example-page.jsx` → "Example Page"
   - `UserProfile.tsx` → "User Profile"
   - `market-relationships-charts.tsx` → "Market Relationships Charts"
 
@@ -70,10 +71,10 @@ const modules = import.meta.glob('./pages/*.tsx', { eager: true })
    npm run dev
    ```
 2. Open http://localhost:5173 in your browser
-3. Add new `.tsx` files to `src/pages/` and watch them appear automatically!
+3. Add new `.tsx` or `.jsx` files to `src/pages/` and watch them appear automatically!
 
 ### Adding New Pages
-1. Create a new `.tsx` file in the `src/pages/` directory
+1. Create a new `.tsx` or `.jsx` file in the `src/pages/` directory
 2. Export your React component as the default export:
    ```tsx
    import React from 'react';
@@ -152,7 +153,7 @@ The project includes several example pages:
 
 ## 🤝 Contributing
 
-1. Add your `.tsx` files to the `src/pages/` directory
+1. Add your `.tsx` or `.jsx` files to the `src/pages/` directory
 2. Follow React best practices
 3. Use TypeScript for type safety
 4. Test on mobile devices
@@ -163,9 +164,9 @@ This project is open source and available under the MIT License.
 
 ## 🆘 Troubleshooting
 
-### Page Not Appearing
+-### Page Not Appearing
 - Ensure your file is in `src/pages/` directory
-- Check that it has a `.tsx` extension
+- Check that it has a `.tsx` or `.jsx` extension
 - Verify the component is exported as default
 - Restart the development server if needed
 

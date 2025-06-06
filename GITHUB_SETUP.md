@@ -4,9 +4,9 @@ This document details the complete process of setting up the React Pages Hub wit
 
 ## 🎯 Project Overview
 
-The React Pages Hub is a modern React application that automatically discovers both `.tsx` React components and `.html` files in the `src/pages/` directory and displays them in a beautiful table of contents interface. It features:
+The React Pages Hub is a modern React application that automatically discovers `.tsx` and `.jsx` React components as well as `.html` files in the `src/pages/` directory and displays them in a beautiful table of contents interface. It features:
 
-- **Dual Content Support**: React components (.tsx) for interactive pages and static HTML files for standalone content
+- **Dual Content Support**: React components (.tsx or .jsx) for interactive pages and static HTML files for standalone content
 - **Automatic Discovery**: New files automatically appear in the interface without code changes
 - **Visual Distinction**: HTML files display with globe icon and green styling, React components with file icon and blue styling
 - **Smart Navigation**: React components use client-side routing, HTML files open in new tabs for security
@@ -44,7 +44,7 @@ npm install -D @tailwindcss/postcss  # Critical for production builds
 
 ### 3. HTML File Support Setup
 
-The application supports both React components (.tsx) and static HTML files (.html) with automatic build process:
+The application supports both React components (.tsx or .jsx) and static HTML files (.html) with automatic build process:
 
 #### 3.1 Build Script Configuration (`package.json`)
 
@@ -182,7 +182,7 @@ export default {
 git init
 
 # Create GitHub repository
-gh repo create react-pages-hub --public --description "A modern React-based web page that serves as a hub for accessing rendered React pages (.tsx files) with automatic discovery and GitHub Pages deployment"
+gh repo create react-pages-hub --public --description "A modern React-based web page that serves as a hub for accessing rendered React pages (.tsx or .jsx files) with automatic discovery and GitHub Pages deployment"
 
 # Set correct remote URL
 git remote set-url origin https://github.com/YOUR_USERNAME/react-pages-hub.git
@@ -346,10 +346,10 @@ react-pages-hub/
 
 To add a new page:
 
-1. Create a new `.tsx` file in `src/pages/`:
+1. Create a new `.tsx` or `.jsx` file in `src/pages/`:
 
 ```typescript
-// src/pages/MyNewPage.tsx
+// src/pages/MyNewPage.tsx (or .jsx)
 export default function MyNewPage() {
   return (
     <div>
@@ -363,7 +363,7 @@ export default function MyNewPage() {
 2. Commit and push:
 
 ```bash
-git add src/pages/MyNewPage.tsx
+git add src/pages/MyNewPage.tsx  # or MyNewPage.jsx
 git commit -m "Add MyNewPage"
 git push
 ```
