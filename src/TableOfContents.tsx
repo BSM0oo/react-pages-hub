@@ -208,6 +208,7 @@ export default function TableOfContents() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-1">Create a new .tsx or .jsx file</h4>
+                    <p className="text-gray-600 text-sm">Use a <code className="bg-gray-100 px-2 py-1 rounded text-xs">.tsx</code> extension if your code includes TypeScript.</p>
                     <p className="text-gray-600 text-sm">Place it directly inside the <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code> folder (no subfolders)</p>
                   </div>
                 </div>

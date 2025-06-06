@@ -74,8 +74,11 @@ const modules = import.meta.glob('./pages/*.{tsx,jsx}', { eager: true })
 2. Open http://localhost:5173 in your browser
 3. Add new `.tsx` or `.jsx` files to `src/pages/` and watch them appear automatically!
 
+> **Note**: Files that use TypeScript features (like type annotations) must use a `.tsx` extension.
+
 ### Adding New Pages
 1. Create a new `.tsx` or `.jsx` file in the `src/pages/` directory
+> **Tip**: Rename the file to `.tsx` if you use TypeScript syntax inside the component.
 2. Export your React component as the default export:
    ```tsx
    import React from 'react';
@@ -176,6 +179,7 @@ This project is open source and available under the MIT License.
 ### Page Not Appearing
 - Ensure your file is in `src/pages/` directory
 - Check that it has a `.tsx` or `.jsx` extension
+- If you use TypeScript in a `.jsx` file, rename it to `.tsx` to avoid build errors
 - Verify the component is exported as default
 - Restart the development server if needed
 
