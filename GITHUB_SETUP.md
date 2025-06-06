@@ -392,5 +392,5 @@ If you encounter issues:
 ---
 
 **Repository**: https://github.com/BSM0oo/react-pages-hub  
-**Live Site**: https://bsm0oo.github.io/react-pages-hub/  
+**Live Site**: https://YOUR_USERNAME.github.io/react-pages-hub/
 **Created**: December 2024
