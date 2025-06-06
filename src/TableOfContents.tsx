@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe } from 'lucide-react'
 
 // eager:true so modules have .default immediately
-const modules = import.meta.glob('./pages/*.tsx', { eager: true })
+const modules = import.meta.glob('./pages/*.{tsx,jsx}', { eager: true })
 
 // Get HTML files manually - these may live in subdirectories under src/pages
 // They are copied to public/pages/ with the same folder structure
@@ -20,7 +20,7 @@ const htmlFiles = Object.keys(htmlModules).map(filePath => {
 export default function TableOfContents() {
   // derive page names from file paths for TSX files
   const tsxEntries = Object.keys(modules).map((path) => {
-    const name = path.match(/\.\/pages\/(.*)\.tsx$/)?.[1] || 'unknown'
+    const name = path.match(/\.\/pages\/(.*)\.(?:tsx|jsx)$/)?.[1] || 'unknown'
     // Convert kebab-case and camelCase to readable titles
     const title = name
       .replace(/[-_]/g, ' ')
@@ -68,7 +68,7 @@ export default function TableOfContents() {
             </div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               A modern, mobile-friendly dashboard for accessing your React components and HTML pages. 
-              Add any .tsx or .html file to the pages folder and it will automatically appear here.
+              Add any .tsx, .jsx, or .html file to the pages folder and it will automatically appear here.
             </p>
           </div>
         </div>
@@ -93,7 +93,7 @@ export default function TableOfContents() {
             <div className="text-center py-12 bg-white rounded-2xl shadow-lg border border-gray-100">
               <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-600 mb-2">No pages found</h3>
-              <p className="text-gray-500">Add .tsx or .html files to the src/pages/ folder to get started</p>
+              <p className="text-gray-500">Add .tsx, .jsx, or .html files to the src/pages/ folder to get started</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -182,16 +182,16 @@ export default function TableOfContents() {
             🚀 How to Add New Pages
           </h2>
           <div className="space-y-6">
-            {/* TSX Instructions */}
+            {/* TSX/JSX Instructions */}
             <div className="border-l-4 border-blue-500 pl-4">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">React Components (.tsx)</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">React Components (.tsx or .jsx)</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">
                     1
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-800 mb-1">Create a new .tsx file</h4>
+                    <h4 className="font-semibold text-gray-800 mb-1">Create a new .tsx or .jsx file</h4>
                     <p className="text-gray-600 text-sm">Place it directly inside the <code className="bg-gray-100 px-2 py-1 rounded text-xs">src/pages/</code> folder (no subfolders)</p>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export default function TableOfContents() {
             <pre className="text-sm text-blue-700 font-mono">
 {`src/pages/
 ├── my-dashboard.tsx     → /my-dashboard (React Router)
-├── UserProfile.tsx      → /UserProfile (React Router)
+├── example-page.jsx     → /example-page (React Router)
 ├── data-charts.tsx      → /data-charts (React Router)
 ├── quiz-game.html       → Direct HTML page
 ├── landing-page.html    → Direct HTML page
@@ -279,7 +279,7 @@ export default function TableOfContents() {
               <Monitor className="w-6 h-6 text-blue-600" />
             </div>
             <h3 className="font-semibold text-gray-800 mb-2">Auto-Detection</h3>
-            <p className="text-sm text-gray-600">New .tsx and .html files automatically appear in real-time</p>
+            <p className="text-sm text-gray-600">New .tsx, .jsx and .html files automatically appear in real-time</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">

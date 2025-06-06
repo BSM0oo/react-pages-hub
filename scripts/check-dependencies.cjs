@@ -21,7 +21,7 @@ function scanForImports(dir) {
       
       if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
         scanDirectory(fullPath);
-      } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
+      } else if (item.endsWith('.tsx') || item.endsWith('.ts') || item.endsWith('.jsx') || item.endsWith('.js')) {
         const content = fs.readFileSync(fullPath, 'utf8');
         
         // Match import statements
