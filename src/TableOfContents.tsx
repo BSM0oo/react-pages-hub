@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 import { FileText, ExternalLink, Smartphone, Monitor, Github, Globe, Search } from 'lucide-react'
+import pagesMeta from './pages-meta'
 
 // eager:true so modules have .default immediately
 const modules = import.meta.glob('./pages/*.{tsx,jsx}', { eager: true })
@@ -18,7 +19,11 @@ const htmlFiles = Object.keys(htmlModules).map(filePath => {
   return { name, relative }
 })
 
-function parseDateFromName(name: string): Date | null {
+function getFileDate(name: string): Date | null {
+  const metaDate = pagesMeta[name]
+  if (metaDate) {
+    return new Date(metaDate)
+  }
   const match = name.match(/^(\d{6})[-_]/)
   if (!match) return null
   const [yy, mm, dd] = [match[1].slice(0, 2), match[1].slice(2, 4), match[1].slice(4, 6)]
@@ -43,7 +48,7 @@ export default function TableOfContents() {
       .join(' ')
       .trim()
 
-    const date = parseDateFromName(name)
+    const date = getFileDate(name)
 
     return { name, path: `/${name}`, title, type: 'tsx' as const, date }
   })
@@ -63,7 +68,7 @@ export default function TableOfContents() {
     // HTML files will be accessible from the public/pages directory
     // We need to use the base URL for proper routing
     const basePath = import.meta.env.BASE_URL || '/'
-    const date = parseDateFromName(name)
+    const date = getFileDate(name)
     return { name, path: `${basePath}pages/${relative}`, title, type: 'html' as const, date }
   }).filter(Boolean) as Array<{ name: string; path: string; title: string; type: 'html'; date: Date | null }>
 
@@ -187,7 +192,7 @@ export default function TableOfContents() {
                       {isHtml ? 'File:' : 'Component:'} {name}
                     </p>
                     <p className="text-xs text-gray-400 mb-4">
-                      {date ? `Uploaded ${format(date, 'yyyy-MM-dd')}` : 'Uploaded N/A'}
+                      {date ? `Updated ${format(date, 'yyyy-MM-dd')}` : 'Updated N/A'}
                     </p>
                     
                     <div className="flex items-center justify-between">

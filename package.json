@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/copy-html.cjs && vite build",
+    "dev": "node scripts/generate-pages-meta.cjs && vite",
+    "build": "node scripts/generate-pages-meta.cjs && node scripts/copy-html.cjs && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "check-deps": "node scripts/check-dependencies.cjs",
