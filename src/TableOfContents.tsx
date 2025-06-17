@@ -30,7 +30,7 @@ function parseDateFromName(name: string): Date | null {
 
 export default function TableOfContents() {
   const [query, setQuery] = useState('')
-  const [sortOption, setSortOption] = useState<'title-asc' | 'title-desc' | 'date-new' | 'date-old'>('title-asc')
+  const [sortOption, setSortOption] = useState<'title-asc' | 'title-desc' | 'date-new' | 'date-old'>('date-new')
   // derive page names from file paths for TSX files
   const tsxEntries = Object.keys(modules).map((path) => {
     const name = path.match(/\.\/pages\/(.*)\.(?:tsx|jsx)$/)?.[1] || 'unknown'
