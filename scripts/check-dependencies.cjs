@@ -79,7 +79,8 @@ function checkDependencies() {
   const builtInModules = ['react', 'react-dom', 'fs', 'path', 'util', 'events'];
   const filteredMissingDeps = missingDeps.filter(dep => 
     !builtInModules.includes(dep) && 
-    !dep.startsWith('node:')
+    !dep.startsWith('node:') &&
+    !dep.startsWith('@/') // Ignore local path aliases like @/components
   );
   
   console.log(`📦 Found ${requiredDeps.length} total dependencies`);

@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-const { scanForImports } = require('./check-dependencies');
+const { scanForImports } = require('./check-dependencies.cjs');
 
 /**
  * Automatically installs missing dependencies
@@ -34,7 +34,8 @@ function autoInstallDependencies() {
   const filteredMissingDeps = missingDeps.filter(dep => 
     !builtInModules.includes(dep) && 
     !dep.startsWith('node:') &&
-    !dep.includes('types/node') // Avoid installing Node.js types automatically
+    !dep.includes('types/node') && // Avoid installing Node.js types automatically
+    !dep.startsWith('@/') // Ignore local path aliases like @/components
   );
   
   if (filteredMissingDeps.length === 0) {
