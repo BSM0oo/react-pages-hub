@@ -192,6 +192,9 @@ This project is open source and available under the MIT License.
 - Run `npm install` to ensure all dependencies are installed
 - Check for TypeScript errors in your components
 - Verify all imports are correct
+- If you see a blank page on GitHub Pages, make sure the router basename matches
+  the Vite base URL. The project now uses `import.meta.env.BASE_URL` so it stays
+  in sync automatically.
 
 ---
 
