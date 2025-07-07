@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golf Hip Angles Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c5530;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #2c5530;
+            color: white;
+            font-weight: bold;
+        }
+        .trail-side {
+            background-color: #ffebee;
+        }
+        .lead-side {
+            background-color: #e8f5e8;
+        }
+        .visual-section {
+            margin: 40px 0;
+            padding: 20px;
+            border: 2px solid #2c5530;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .swing-position {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+            vertical-align: top;
+        }
+        .golfer-diagram {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        .angle-display {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .trail-angle {
+            color: #d32f2f;
+        }
+        .lead-angle {
+            color: #388e3c;
+        }
+        .position-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c5530;
+            margin-bottom: 10px;
+        }
+        .key-insights {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #ff9800;
+            margin: 20px 0;
+        }
+        .movement-arrow {
+            font-size: 24px;
+            margin: 0 10px;
+            color: #2c5530;
+        }
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        .trail-color {
+            background-color: #ffcdd2;
+        }
+        .lead-color {
+            background-color: #c8e6c9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PGA Tour Winner Hip Angle Analysis</h1>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="color-box trail-color"></div>
+                <span>Trail Side (Right for RH golfer)</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box lead-color"></div>
+                <span>Lead Side (Left for RH golfer)</span>
+            </div>
+        </div>
+
+        <h2>Numerical Data from 3D Analysis</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Swing Position</th>
+                    <th>Trail Side Angle (Right)</th>
+                    <th>Lead Side Angle (Left)</th>
+                    <th>Change from Previous</th>
+                    <th>Key Movement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Address</strong></td>
+                    <td class="trail-side">Baseline (100°*)</td>
+                    <td class="lead-side">Baseline (100°*)</td>
+                    <td>--</td>
+                    <td>Asymmetrical setup</td>
+                </tr>
+                <tr>
+                    <td><strong>Shaft Parallel Back</strong></td>
+                    <td class="trail-side">Flexing</td>
+                    <td class="lead-side">Extending</td>
+                    <td>Opposite movements begin</td>
+                    <td>Trail side to wall</td>
+                </tr>
+                <tr>
+                    <td><strong>Lead Arm Parallel</strong></td>
+                    <td class="trail-side">Further Flexion</td>
+                    <td class="lead-side">Further Extension</td>
+                    <td>Movements amplify</td>
+                    <td>Pattern continues</td>
+                </tr>
+                <tr>
+                    <td><strong>Top of Swing</strong></td>
+                    <td class="trail-side">84° (-16° flexion)</td>
+                    <td class="lead-side">121° (+21° extension)</td>
+                    <td>Maximum separation</td>
+                    <td>Peak differential</td>
+                </tr>
+                <tr>
+                    <td><strong>Lead Arm Parallel Down</strong></td>
+                    <td class="trail-side">97° (+13° extension)</td>
+                    <td class="lead-side">105° (-16° flexion)</td>
+                    <td>Reversal begins</td>
+                    <td>Trail side "early extends"</td>
+                </tr>
+                <tr>
+                    <td><strong>Shaft Parallel Down</strong></td>
+                    <td class="trail-side">Continuing Extension</td>
+                    <td class="lead-side">Continuing Flexion</td>
+                    <td>Pattern reversal</td>
+                    <td>Lead side to wall</td>
+                </tr>
+                <tr>
+                    <td><strong>Impact</strong></td>
+                    <td class="trail-side">121°+ (Maximum Extension)</td>
+                    <td class="lead-side">84°- (Maximum Flexion)</td>
+                    <td>Complete reversal</td>
+                    <td>Near straight line</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><em>*Round numbers used for illustration (100° baseline)</em></p>
+
+        <div class="visual-section">
+            <h2>Visual Swing Progression</h2>
+            <div style="text-align: center;">
+                
+                <div class="swing-position">
+                    <div class="position-title">ADDRESS</div>
+                    <svg class="golfer-diagram" viewBox="0 0 200 250">
+                        <!-- Ground line -->
+                        <line x1="0" y1="240" x2="200" y2="240" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Golfer stick figure -->
+                        <circle cx="100" cy="50" r="15" fill="#FFE4B5" stroke="#8B4513" stroke-width="2"/>
+                        <!-- Torso -->
+                        <line x1="100" y1="65" x2="100" y2="140" stroke="#4A4A4A" stroke-width="6"/>
+                        <!-- Arms -->
+                        <line x1="100" y1="80" x2="85" y2="120" stroke="#4A4A4A" stroke-width="4"/>
+                        <line x1="100" y1="80" x2="115" y2="120" stroke="#4A4A4A" stroke-width="4"/>
+                        <!-- Club -->
+                        <line x1="100" y1="120" x2="130" y2="200" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Legs -->
+                        <line x1="100" y1="140" x2="85" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <line x1="100" y1="140" x2="115" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <!-- Hip angles -->
+                        <path d="M 85 140 Q 100 130 115 140" stroke="#FF5722" stroke-width="2" fill="none"/>
+                        <text x="100" y="135" text-anchor="middle" font-size="10" fill="#FF5722">100°</text>
+                        <!-- Feet -->
+                        <ellipse cx="85" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                        <ellipse cx="115" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                    </svg>
+                    <div class="angle-display">
+                        <span class="trail-angle">Right: 100°</span><br>
+                        <span class="lead-angle">Left: 100°</span>
+                    </div>
+                </div>
+
+                <span class="movement-arrow">→</span>
+
+                <div class="swing-position">
+                    <div class="position-title">TOP OF SWING</div>
+                    <svg class="golfer-diagram" viewBox="0 0 200 250">
+                        <!-- Ground line -->
+                        <line x1="0" y1="240" x2="200" y2="240" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Golfer rotated -->
+                        <circle cx="110" cy="50" r="15" fill="#FFE4B5" stroke="#8B4513" stroke-width="2"/>
+                        <!-- Torso (rotated) -->
+                        <line x1="110" y1="65" x2="95" y2="140" stroke="#4A4A4A" stroke-width="6"/>
+                        <!-- Arms (backswing position) -->
+                        <line x1="105" y1="80" x2="130" y2="60" stroke="#4A4A4A" stroke-width="4"/>
+                        <line x1="105" y1="80" x2="145" y2="80" stroke="#4A4A4A" stroke-width="4"/>
+                        <!-- Club (at top) -->
+                        <line x1="140" y1="70" x2="160" y2="40" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Legs (different angles) -->
+                        <line x1="95" y1="140" x2="85" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <line x1="95" y1="140" x2="105" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <!-- Hip angles (different) -->
+                        <path d="M 85 140 Q 90 125 95 140" stroke="#d32f2f" stroke-width="3" fill="none"/>
+                        <text x="88" y="130" text-anchor="middle" font-size="10" fill="#d32f2f">84°</text>
+                        <path d="M 95 140 Q 110 120 125 140" stroke="#388e3c" stroke-width="3" fill="none"/>
+                        <text x="110" y="125" text-anchor="middle" font-size="10" fill="#388e3c">121°</text>
+                        <!-- Feet -->
+                        <ellipse cx="85" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                        <ellipse cx="105" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                    </svg>
+                    <div class="angle-display">
+                        <span class="trail-angle">Right: 84° (-16°)</span><br>
+                        <span class="lead-angle">Left: 121° (+21°)</span>
+                    </div>
+                </div>
+
+                <span class="movement-arrow">→</span>
+
+                <div class="swing-position">
+                    <div class="position-title">IMPACT</div>
+                    <svg class="golfer-diagram" viewBox="0 0 200 250">
+                        <!-- Ground line -->
+                        <line x1="0" y1="240" x2="200" y2="240" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Ball -->
+                        <circle cx="130" cy="230" r="3" fill="white" stroke="black"/>
+                        <!-- Golfer at impact -->
+                        <circle cx="90" cy="50" r="15" fill="#FFE4B5" stroke="#8B4513" stroke-width="2"/>
+                        <!-- Torso (impact position) -->
+                        <line x1="90" y1="65" x2="105" y2="140" stroke="#4A4A4A" stroke-width="6"/>
+                        <!-- Arms (impact) -->
+                        <line x1="95" y1="80" x2="110" y2="120" stroke="#4A4A4A" stroke-width="4"/>
+                        <line x1="95" y1="80" x2="120" y2="110" stroke="#4A4A4A" stroke-width="4"/>
+                        <!-- Club (impact) -->
+                        <line x1="115" y1="115" x2="130" y2="230" stroke="#8B4513" stroke-width="3"/>
+                        <!-- Legs (impact position) -->
+                        <line x1="105" y1="140" x2="95" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <line x1="105" y1="140" x2="125" y2="200" stroke="#4A4A4A" stroke-width="5"/>
+                        <!-- Hip angles (reversed from top) -->
+                        <path d="M 95 140 Q 115 115 135 140" stroke="#d32f2f" stroke-width="3" fill="none"/>
+                        <text x="115" y="120" text-anchor="middle" font-size="10" fill="#d32f2f">121°+</text>
+                        <path d="M 95 140 Q 100 130 105 140" stroke="#388e3c" stroke-width="3" fill="none"/>
+                        <text x="100" y="135" text-anchor="middle" font-size="10" fill="#388e3c">84°-</text>
+                        <!-- Feet -->
+                        <ellipse cx="95" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                        <ellipse cx="125" cy="235" rx="8" ry="4" fill="#8B4513"/>
+                    </svg>
+                    <div class="angle-display">
+                        <span class="trail-angle">Right: 121°+ (MAX)</span><br>
+                        <span class="lead-angle">Left: 84°- (MIN)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="key-insights">
+            <h3>🎯 Key Movement Insights</h3>
+            <ul>
+                <li><strong>Backswing:</strong> Trail side flexes (gets closer to wall), Lead side extends (moves away from wall)</li>
+                <li><strong>Transition:</strong> Movement pattern completely reverses</li>
+                <li><strong>Downswing:</strong> Trail side extends (early extension!), Lead side flexes (moves to wall)</li>
+                <li><strong>Impact:</strong> Angles are reversed from top position - trail side maximum extension, lead side maximum flexion</li>
+                <li><strong>Critical Point:</strong> Both sides NEVER move in the same direction simultaneously</li>
+            </ul>
+        </div>
+
+        <div class="visual-section">
+            <h2>Angle Change Graph</h2>
+            <svg width="100%" height="300" viewBox="0 0 800 300">
+                <!-- Background -->
+                <rect width="800" height="300" fill="#fafafa" stroke="#ddd"/>
+                
+                <!-- Grid lines -->
+                <defs>
+                    <pattern id="grid" width="50" height="25" patternUnits="userSpaceOnUse">
+                        <path d="M 50 0 L 0 0 0 25" fill="none" stroke="#eee" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="800" height="300" fill="url(#grid)"/>
+                
+                <!-- Axes -->
+                <line x1="80" y1="250" x2="750" y2="250" stroke="black" stroke-width="2"/>
+                <line x1="80" y1="50" x2="80" y2="250" stroke="black" stroke-width="2"/>
+                
+                <!-- Baseline at 100 degrees -->
+                <line x1="80" y1="150" x2="750" y2="150" stroke="#999" stroke-width="1" stroke-dasharray="5,5"/>
+                <text x="65" y="155" text-anchor="end" font-size="12">100°</text>
+                
+                <!-- Y-axis labels -->
+                <text x="65" y="80" text-anchor="end" font-size="12">125°</text>
+                <text x="65" y="105" text-anchor="end" font-size="12">115°</text>
+                <text x="65" y="130" text-anchor="end" font-size="12">105°</text>
+                <text x="65" y="180" text-anchor="end" font-size="12">95°</text>
+                <text x="65" y="205" text-anchor="end" font-size="12">85°</text>
+                <text x="65" y="230" text-anchor="end" font-size="12">75°</text>
+                
+                <!-- X-axis labels -->
+                <text x="130" y="270" text-anchor="middle" font-size="12">Address</text>
+                <text x="230" y="270" text-anchor="middle" font-size="12">Shaft ∥</text>
+                <text x="330" y="270" text-anchor="middle" font-size="12">Lead Arm ∥</text>
+                <text x="430" y="270" text-anchor="middle" font-size="12">Top</text>
+                <text x="530" y="270" text-anchor="middle" font-size="12">Lead Arm ∥</text>
+                <text x="630" y="270" text-anchor="middle" font-size="12">Impact</text>
+                
+                <!-- Trail side line (red) -->
+                <polyline points="130,150 230,170 330,180 430,200 530,130 630,75" 
+                          fill="none" stroke="#d32f2f" stroke-width="4"/>
+                
+                <!-- Lead side line (green) -->
+                <polyline points="130,150 230,140 330,120 430,100 530,180 630,230" 
+                          fill="none" stroke="#388e3c" stroke-width="4"/>
+                
+                <!-- Data points -->
+                <circle cx="130" cy="150" r="5" fill="#d32f2f"/>
+                <circle cx="430" cy="200" r="5" fill="#d32f2f"/>
+                <circle cx="630" cy="75" r="5" fill="#d32f2f"/>
+                
+                <circle cx="130" cy="150" r="5" fill="#388e3c"/>
+                <circle cx="430" cy="100" r="5" fill="#388e3c"/>
+                <circle cx="630" cy="230" r="5" fill="#388e3c"/>
+                
+                <!-- Legend -->
+                <line x1="550" y1="70" x2="580" y2="70" stroke="#d32f2f" stroke-width="4"/>
+                <text x="590" y="75" font-size="14" fill="#d32f2f">Trail Side (Right)</text>
+                
+                <line x1="550" y1="90" x2="580" y2="90" stroke="#388e3c" stroke-width="4"/>
+                <text x="590" y="95" font-size="14" fill="#388e3c">Lead Side (Left)</text>
+                
+                <!-- Title -->
+                <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold">Hip Angle Changes Through the Swing</text>
+            </svg>
+        </div>
+
+        <div class="key-insights">
+            <h3>💡 What This Means for Your Swing</h3>
+            <p><strong>The Revolutionary Insight:</strong> Professional golfers don't avoid early extension - they use it strategically on one side while the other side does the opposite. This creates natural rotation and power.</p>
+            
+            <p><strong>Common Error:</strong> Most amateur golfers try to drive both hips back simultaneously, which kills rotation and creates a steep, unnatural swing plane.</p>
+            
+            <p><strong>The Fix:</strong> Allow your trail side to "early extend" in the downswing while your lead side flexes - this is natural and powerful movement that every tour professional uses.</p>
+        </div>
+    </div>
+</body>
+</html>
